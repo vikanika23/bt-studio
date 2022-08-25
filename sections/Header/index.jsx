@@ -1,7 +1,6 @@
-
-import { COLOR_DARK_BLUE, COLOR_PURPUR, COLOR_WHITE, COLOR_GRAY_LINE } from '../../styles/style.js'
 import NextLink from "next/link"
 import { Box, Container, Link, Typography } from '@mui/material'
+import { COLOR_DARK_BLUE, COLOR_PURPUR, COLOR_WHITE, COLOR_GRAY_LINE } from '../../styles/style.js'
 
 const rootStyle = {
   backgroundColor: COLOR_DARK_BLUE,
@@ -19,7 +18,6 @@ const linkStyle = {
     marginRight: "37px",
   },
   "&:hover": {
-
     textDecoration: "none",
     color: COLOR_PURPUR,
   },
@@ -36,6 +34,7 @@ const logoName = {
   textDecoration: "none",
   fontSize: "25px",
   lineHeight: "25px",
+  letterSpacing: "0.05em",
   transition: "all .25s ease",
   "&:hover": {
     textDecoration: "none",
@@ -49,12 +48,12 @@ const Header = () => {
       <Box sx={rootStyle}>
         <Container>
           <Box sx={innerStyle}>
-            
+
             <NextLink href="/" passHref>
               <Link sx={logoName}>BottiniStudio</Link>
             </NextLink>
 
-            <Box component="nav">
+            <Box component="nav" sx={{ display: { xs: "none", md: "block" } }}>
               <NextLink href="/" passHref>
                 <Link sx={linkStyle}>Главная</Link>
               </NextLink>
@@ -77,7 +76,7 @@ const Header = () => {
             </Box>
           </Box>
         </Container>
-      </Box>
+      </Box >
 
 
     </>

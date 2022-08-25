@@ -14,7 +14,7 @@ export const COLOR_FORM_BORDER_LINE = "#CAD1DB"
 export const COLOR_HOVER_LINK = "#5C718D"
 
 // Голубая кнопка для футера
-export const buttonBlueOutlinedStyle = {
+export const buttonPurpurOutlinedStyle = {
   border: `1px solid ${COLOR_PURPUR}`,
   borderRadius: 0,
   padding: "16.5px 17px",
@@ -31,7 +31,7 @@ export const buttonBlueOutlinedStyle = {
 }
 
 // Голубая кнопка c залитым фоном и белым текстом
-export const buttonBlueContainedStyle = {
+export const buttonPurpurContainedStyle = {
   backgroundColor: COLOR_PURPUR,
   border: `2px solid ${COLOR_PURPUR}`,
   color: COLOR_WHITE,
