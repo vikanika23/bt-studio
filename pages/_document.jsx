@@ -12,6 +12,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
         </Head>
         <body>
           <Main />
@@ -29,11 +30,12 @@ MyDocument.getInitialProps = async (ctx) => {
 
   const { extractCriticalToChunks } = createEmotionServer(cache)
 
-  ctx.renderPage = () => originalRenderPage({
-    enhanceApp: (App: any) => function EnhanceApp(props) {
-      return <App emotionCache={cache} {...props} />
-    }
-  })
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App) => function EnhanceApp(props) {
+        return <App emotionCache={cache} {...props} />
+      }
+    })
 
   const initialProps = await Document.getInitialProps(ctx)
 
@@ -48,6 +50,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags]
+    styles: [...React.Children.toArray(initialProps.styles),
+    ...emotionStyleTags]
   }
 }

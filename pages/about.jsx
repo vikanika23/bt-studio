@@ -1,9 +1,9 @@
 import { Link, Typography } from '@mui/material'
-import { NextPage } from 'next'
 import NextLink from 'next/link'
 import Layout from '../components/Layout'
 
-const AboutPage: NextPage = () => {
+
+export default function AboutPage() {
   return (
     <Layout title="О нас | Next.js + TypeScript Example">
       <Typography variant='h1'>О нас</Typography>
@@ -15,5 +15,3 @@ const AboutPage: NextPage = () => {
     </Layout>
   )
 }
-
-export default AboutPage
