@@ -1,9 +1,10 @@
 import NextLink from "next/link"
 import { Box, Container, Link, Typography } from '@mui/material'
-import { COLOR_DARK_BLUE, COLOR_PURPUR, COLOR_WHITE, COLOR_GRAY_LINE } from '../../styles/style.js'
+import { COLOR_DARK, COLOR_MIDDLE_BLUE, COLOR_WHITE, COLOR_GRAY_LINE } from '../../styles/style.js'
+import useSWR from "swr"
 
 const rootStyle = {
-  backgroundColor: COLOR_DARK_BLUE,
+  backgroundColor: COLOR_DARK,
   padding: { xs: "15px 0", md: "20px 0" },
 }
 
@@ -19,7 +20,7 @@ const linkStyle = {
   },
   "&:hover": {
     textDecoration: "none",
-    color: COLOR_PURPUR,
+    color: COLOR_MIDDLE_BLUE,
   },
 }
 
@@ -42,37 +43,41 @@ const logoName = {
   }
 }
 
-const Header = () => {
+const Header = ({ data }) => {
+
+  const menu = data?.attributes?.menu
+  console.log({ data })
+  console.log({ menu })
+
   return (
     <>
       <Box sx={rootStyle}>
         <Container>
           <Box sx={innerStyle}>
 
+
             <NextLink href="/" passHref>
               <Link sx={logoName}>BottiniStudio</Link>
             </NextLink>
 
             <Box component="nav" sx={{ display: { xs: "none", md: "block" } }}>
-              <NextLink href="/" passHref>
-                <Link sx={linkStyle}>Главная</Link>
-              </NextLink>
 
-              <NextLink href="/about" passHref>
-                <Link sx={linkStyle}>Доставка и оплата</Link>
-              </NextLink>
+              {menu?.map((item, i) => {
+                // const href = `/pages/${item?.link?.data?.attributes?.href}`
+                const href = item?.link?.data?.attributes?.href
 
-              <NextLink href="/about" passHref>
-                <Link sx={linkStyle}>О нас</Link>
-              </NextLink>
+                console.log({ href })
 
-              <NextLink href="/users" passHref>
-                <Link sx={linkStyle}>Стоимость</Link>
-              </NextLink>
-
-              <NextLink href="/api/users" passHref>
-                <Link sx={linkStyle}>Контакты</Link>
-              </NextLink>
+                return (
+                  <>
+                    {href && (
+                      <NextLink key={i} href={href} passHref >
+                        <Link sx={linkStyle}>{item?.label}</Link >
+                      </NextLink>
+                    )}
+                  </>
+                )
+              })}
             </Box>
           </Box>
         </Container>

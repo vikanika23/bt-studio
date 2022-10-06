@@ -5,7 +5,7 @@ import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
-import { COLOR_DARK_BLUE, COLOR_WHITE, buttonPurpurOutlinedStyle, COLOR_PURPUR, COLOR_LIGHTER_GREY, COLOR_GRAY_LINE } from "../../styles/style"
+import { COLOR_DARK, COLOR_WHITE, buttonPurpurOutlinedStyle, COLOR_PURPUR, COLOR_LIGHTER_GREY, COLOR_GRAY_LINE } from "../../styles/style"
 import NextLink from "next/link"
 import { useContext } from "react"
 import { PageContext } from "../../utils/contexts"
@@ -13,7 +13,7 @@ import PhoneIcon from '@mui/icons-material/Phone'
 
 
 const rootStyle = {
-  backgroundColor: COLOR_DARK_BLUE,
+  backgroundColor: COLOR_DARK,
   padding: { sm: "33px 0 39px", md: "58px 0 48px" },
 }
 

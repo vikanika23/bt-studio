@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Grid from '@mui/material/Grid'
 import NextLink from 'next/link'
-import { COLOR_DARK_BLUE, COLOR_PURPUR, COLOR_WHITE, COLOR_GRAY_LINE, buttonPurpurContainedStyle } from '../../styles/style.js'
+import { COLOR_PURPUR, COLOR_WHITE, COLOR_GRAY_LINE, buttonPurpurContainedStyle } from '../../styles/style.js'
 
 const rootStyle = {
   padding: { xs: "15px 0 35px", sm: "15px 0 0", md: "30px 0 0" },
@@ -46,7 +46,8 @@ const boxImg = {
   }
 }
 
-const Sectin01FirstScreen = () => {
+const Sectin01FirstScreen = ({data}) => {
+  console.log("ГЛАВНАЯ",{data})
   return (
     <>
       <Box component="section" sx={rootStyle}>
