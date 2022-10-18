@@ -47,7 +47,7 @@ const boxImg = {
 }
 
 const Sectin01FirstScreen = ({data}) => {
-  console.log("ГЛАВНАЯ",{data})
+  
   return (
     <>
       <Box component="section" sx={rootStyle}>

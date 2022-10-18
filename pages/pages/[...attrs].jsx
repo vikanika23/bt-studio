@@ -1,15 +1,15 @@
 import { Link, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import NextLink from 'next/link'
-import Sectin01FirstScreen from '../../sections/Sectin01FirstScreen'
+import DynamicZone from '../../sections/DynamicZone'
 import { fetcher } from "../../utils/fetchers"
 import qs from 'qs'
 import { getGlobalData } from "../../utils/queries"
 
-const Page = () => {
+const Page = (props) => {
   return (
     <>
-      <Sectin01FirstScreen />
+      <DynamicZone data={props} />
     </>
   )
 }
@@ -20,17 +20,12 @@ export async function getStaticPaths() {
   const pages = await fetcher(process.env.NEXT_PUBLIC_API_URL + `/api/pages?${qs.stringify({
     populate: [
       "pages",
-      "pages.data",
-      "pages.data.blog_dynamic_zone"
+      "pages.dynamic_zone"
     ]
   })}`)
 
   const paths = pages?.data?.map(page => {
     const slug = page?.attributes?.slug
-
-    console.log({ pages })
-
-    console.log({ slug })
 
     return ({
       params: {
@@ -38,8 +33,7 @@ export async function getStaticPaths() {
       }
     })
   })
-  console.log({ paths })
-
+  
   return {
     paths,
     fallback: 'blocking'
@@ -48,7 +42,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const attrs = params?.attrs
-  console.log(params)
+ 
   let filters = {}
   filters.slug = { $eq: attrs[0] }
 
@@ -56,7 +50,19 @@ export async function getStaticProps({ params }) {
   const pages = await fetcher(process.env.NEXT_PUBLIC_API_URL + `/api/pages?${qs.stringify({
     filters,
     populate: [
-      "blog_dynamic_zone"
+      "page",
+      "dynamic_zone",
+      "dynamic_zone.articles",
+      "dynamic_zone.articles.preview_image",
+      "dynamic_zone.articles.category",
+      "dynamic_zone.button",
+      "dynamic_zone.button.link",
+      "dynamic_zone.Paddings",
+      "Paddings",
+      "dynamic_zone.page_menu",
+      "dynamic_zone.page_menu.link"
+      
+      
     ]
   })}`)
 
@@ -80,10 +86,6 @@ export async function getStaticProps({ params }) {
     href: '/blog'
   }]
 
-  console.log(pages)
-  console.log(page)
-  console.log(breadcrumbLinks)
-
   const global = await getGlobalData()
 
   return {
@@ -91,10 +93,6 @@ export async function getStaticProps({ params }) {
       page,
       breadcrumbLinks,
       ...global,
-      // fallback: {
-      //   article,
-      //   breadcrumbLinks,
-      // }
     },
     revalidate: 60
   }

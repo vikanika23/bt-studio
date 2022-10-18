@@ -1,19 +1,21 @@
 import qs from 'qs'
 import { fetcher } from '../../utils/fetchers'
-import BlogDynamicZone from '../../sections/BlogSection/BlogDynamicZone'
+import BlogSection from '../../sections/BlogSection'
 import { getGlobalData } from "../../utils/queries"
 
 export default function ArticlePage(props) {
   return (
     <>
-      <BlogDynamicZone data={props} />
+      <BlogSection data={props} />
     </>
   )
 }
 
 export async function getStaticPaths() {
   const articls = await fetcher(process.env.NEXT_PUBLIC_API_URL + `/api/articles?${qs.stringify({
-    populate: []
+    populate: [
+     
+    ]
   })}`)
 
   const paths = articls?.data?.map(article => {
@@ -34,7 +36,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const attrs = params?.attrs
-  console.log(params)
+
   let filters = {}
   filters.slug = { $eq: attrs[0] }
 
@@ -42,7 +44,17 @@ export async function getStaticProps({ params }) {
   const articls = await fetcher(process.env.NEXT_PUBLIC_API_URL + `/api/articles?${qs.stringify({
     filters,
     populate: [
-      "blog_dynamic_zone"
+      "blog_dynamic_zone",
+      "blog_dynamic_zone.images",
+      "blog_dynamic_zone.images.image",
+      "blog_dynamic_zone.Paddings",
+      "preview_image",
+      "Paddings",
+      "Advice",
+      "author",
+      "author.picture",
+      "writer",
+      
     ]
   })}`)
 
@@ -53,7 +65,7 @@ export async function getStaticProps({ params }) {
       notFound: true
     }
   }
-  
+
   const name = article?.attributes?.title
 
   const breadcrumbLinks = [{
@@ -68,10 +80,6 @@ export async function getStaticProps({ params }) {
     id: 3,
     label: `Тема: ${name}`,
   }]
-
-  console.log(articls)
-  console.log(article)
-  console.log(breadcrumbLinks)
 
   const global = await getGlobalData()
 

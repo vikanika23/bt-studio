@@ -1,9 +1,9 @@
 import NextLink from 'next/link'
 import ReactMarkdown from 'react-markdown'
-import { Box, Container, Grid } from '@mui/material'
-import { COLOR_DARK_BLUE, COLOR_MIDDLE_BLUE, COLOR_GRAY_LINE, COLOR_BACKGROUND, COLOR_DARK, COLOR_RED } from "../../../styles/style"
+import { Box, Container, Grid, Link } from '@mui/material'
+import { COLOR_DARK_BLUE, COLOR_MIDDLE_BLUE, COLOR_GRAY_LINE, COLOR_WHITE, COLOR_DARK, COLOR_RED } from "../../styles/style"
 import IconRed from "./IconRed.svg"
-import getPaddings from "../../../utils/getPaddings"
+import getPaddings from "../../utils/getPaddings"
 
 const components = {
   "p": ({ node, ...props }) => <p {...props} />,
@@ -32,7 +32,6 @@ const components = {
   "input": ({ node, ...props }) => <input {...props} />,
   "table": ({ node, ...props }) => <table {...props} />,
 }
-
 
 const markdownStyle = {
   "& p": {
@@ -223,8 +222,30 @@ const markdownStyle = {
   }
 }
 
-const SectionMarckdown = ({ data }) => {
+const navStyle = {
+  display: "flex",
+  flexDirection: "column",
+  marginTop: "30px"
+}
+const linkStyle = {
+  fontWeight: 300,
+  color: COLOR_MIDDLE_BLUE,
+  textDecoration: "none",
+  fontSize: "16px",
+  lineHeight: "24px",
+  transition: "all .25s ease",
+  "&:not(:last-of-type)": {
+    marginBottom: "15px",
+  },
+  "&:hover": {
+    textDecoration: "none",
+    color: COLOR_RED,
+  },
+}
+
+const SectionMainMarckdown = ({ data }) => {
   const markdown = data?.description
+  const page_menu = data?.page_menu
 
   const paddings = data?.Paddings
   const paddingBottom = paddings?.padding_bottom
@@ -241,8 +262,30 @@ const SectionMarckdown = ({ data }) => {
       <Box sx={{ display: { xs: "none", sm: "block" } }}>
         <Container>
           <Grid container spacing={{ xs: 4, sm: 4, md: 4 }}>
-            <Grid item xs={12} sm={3} md={2}></Grid>
-            <Grid item xs={12} sm={9} md={8}>
+
+            <Grid item xs={12} sm={3} md={3}>
+
+              <Box component="nav" sx={navStyle}>
+                {page_menu.map(pm => {
+                  const href = pm?.link?.data?.attributes?.href
+                  const label = pm?.label
+                  return (
+                    <>
+                      {href && (
+                        <NextLink key={pm.id} href={href} passHref >
+                          <Link sx={linkStyle}>{label}</Link >
+                        </NextLink>
+                      )}
+                    </>
+                  )
+                })}
+
+              </Box>
+
+
+            </Grid>
+
+            <Grid item xs={12} sm={9} md={9}>
               <Box sx={markdownStyle} >
                 <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
               </Box>
@@ -259,4 +302,4 @@ const SectionMarckdown = ({ data }) => {
   )
 }
 
-export default SectionMarckdown
+export default SectionMainMarckdown

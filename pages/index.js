@@ -7,10 +7,12 @@ import Sectin01FirstScreen from '../sections/Sectin01FirstScreen'
 import { fetcher } from "../utils/fetchers"
 import qs from 'qs'
 import { getGlobalData } from "../utils/queries"
+import DynamicZone from '../sections/DynamicZone'
 
 const HomePage = (props) => {
   return (
     <>
+      <DynamicZone data={props} />
       <Sectin01FirstScreen data={props} />
     </>
   )
@@ -54,7 +56,15 @@ export async function getStaticProps({ params }) {
   const pages = await fetcher(process.env.NEXT_PUBLIC_API_URL + `/api/pages?${qs.stringify({
     // filters,
     populate: [
-      "blog_dynamic_zone"
+      "dynamic_zone",
+      "dynamic_zone.articles",
+      "dynamic_zone.articles.preview_image",
+      "dynamic_zone.articles.category",
+      "dynamic_zone.button",
+      "dynamic_zone.button.link",
+      "dynamic_zone.Paddings",
+      "Paddings"
+      
     ]
   })}`)
 
@@ -74,10 +84,6 @@ export async function getStaticProps({ params }) {
     href: '/'
   }]
 
-  console.log(pages)
-  console.log(page)
-  console.log(breadcrumbLinks)
-
   const global = await getGlobalData()
 
   return {
@@ -85,10 +91,6 @@ export async function getStaticProps({ params }) {
       page,
       breadcrumbLinks,
       ...global,
-      // fallback: {
-      //   article,
-      //   breadcrumbLinks,
-      // }
     },
     revalidate: 60
   }

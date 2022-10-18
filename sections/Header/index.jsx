@@ -63,10 +63,7 @@ const Header = ({ data }) => {
             <Box component="nav" sx={{ display: { xs: "none", md: "block" } }}>
 
               {menu?.map((item, i) => {
-                // const href = `/pages/${item?.link?.data?.attributes?.href}`
                 const href = item?.link?.data?.attributes?.href
-
-                console.log({ href })
 
                 return (
                   <>

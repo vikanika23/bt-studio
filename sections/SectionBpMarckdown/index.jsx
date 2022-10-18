@@ -1,29 +1,34 @@
 import NextLink from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import { Box, Container, Grid } from '@mui/material'
-import { COLOR_DARK_BLUE, COLOR_MIDDLE_BLUE, COLOR_GRAY_LINE, COLOR_BACKGROUND, COLOR_DARK, COLOR_RED } from "../../../styles/style"
+import { COLOR_DARK_BLUE, COLOR_DARK, COLOR_MIDDLE_BLUE, COLOR_BLUE, COLOR_RED } from "../../styles/style"
 import IconRed from "./IconRed.svg"
-import getPaddings from "../../../utils/getPaddings"
+import getPaddings from "../../utils/getPaddings"
 
 const components = {
   "p": ({ node, ...props }) => <p {...props} />,
   "strong": ({ node, ...props }) => <strong {...props} />,
-  "a": ({ node, href, ...props }) =>
+  "a": ({ node, href, ...props }) => (
     <NextLink href={href} passHref>
       <a {...props} />
-    </NextLink>,
-  "blockquote": ({ node, ...props }) =>
-    <div className="markdownBlockquote">
+    </NextLink>
+  ),
+  "blockquote": ({ node, ...props }) => (
+    <div className='markdownBlockquoteStyle'>
+      <div className="markdownBlockquoteIconStyle">
+        <IconRed />
+      </div>
       <blockquote {...props} />
-    </div>,
+    </div>
+  ),
   "h1": ({ node, ...props }) => <h1 {...props} />,
   "h2": ({ node, ...props }) => <h2 {...props} />,
   "h3": ({ node, ...props }) => <h3 {...props} />,
   "h4": ({ node, ...props }) => <h4 {...props} />,
   "h5": ({ node, ...props }) => <h5 {...props} />,
   "h6": ({ node, ...props }) => <h6 {...props} />,
-  "ul": ({ node, ...props }) => <ul {...props} />,
-  "li": ({ node, ...props }) => <li {...props} />,
+  "ul": ({ node, ordered, depth, ...props }) => <ul {...props} />,
+  "li": ({ node, ordered, checked, index, ...props }) => <li {...props} />,
   "ol": ({ node, ...props }) => <ol {...props} />,
   "pre": ({ node, ...props }) => <pre {...props} />,
   "code": ({ node, ...props }) => <code {...props} />,
@@ -32,7 +37,6 @@ const components = {
   "input": ({ node, ...props }) => <input {...props} />,
   "table": ({ node, ...props }) => <table {...props} />,
 }
-
 
 const markdownStyle = {
   "& p": {
@@ -62,18 +66,17 @@ const markdownStyle = {
   },
   "& blockquote": {
     margin: "0",
+    marginTop: { xs: "30px", sm: "0" },
   },
   "& blockquote p": {
     fontWeight: 400,
     fontSize: { xs: "17px", sm: "18px", md: "18px" },
     lineHeight: { xs: "24px", sm: "26px", md: "26px" },
     letterSpacing: { xs: "0.005em", sm: "0.005em", md: "0.005em" },
-    color: COLOR_DARK,
+    color: COLOR_DARK_BLUE,
+    marginBottom: "12px",
     "&:nth-child(1)": {
       marginTop: { xs: "0", sm: "0" },
-    },
-    '&:not(:last-child)': {
-      paddingBottom: { xs: '12px', sm: '12px', md: '12px' }
     }
   },
   "& h1": {
@@ -135,7 +138,7 @@ const markdownStyle = {
 
   // дополнительные стили
   "& h4": {
-    fontWeight: 600,
+    fontWeight: 500,
     fontSize: { xs: "16px", sm: "18px", md: "18px" },
     lineHeight: { xs: "20px", sm: "20px", md: "20px" },
     letterSpacing: { xs: "-0.01em", sm: "-0.015em", md: "-0.015em" },
@@ -147,7 +150,7 @@ const markdownStyle = {
     }
   },
   "& h5": {
-    fontWeight: 600,
+    fontWeight: 500,
     fontSize: { xs: "16px", sm: "16px", md: "16px" },
     lineHeight: { xs: "18px", sm: "18px", md: "18px" },
     letterSpacing: { xs: "-0.01em", sm: "-0.015em", md: "-0.015em" },
@@ -159,7 +162,7 @@ const markdownStyle = {
     },
   },
   "& h6": {
-    fontWeight: 600,
+    fontWeight: 500,
     fontSize: { xs: "14px", sm: "14px", md: "14px" },
     lineHeight: { xs: "18px", sm: "18px", md: "18px" },
     letterSpacing: { xs: "-0.01em", sm: "-0.015em", md: "-0.015em" },
@@ -216,14 +219,20 @@ const markdownStyle = {
     letterSpacing: { xs: "-0.01em", sm: "-0.015em", md: "-0.015em" },
     color: COLOR_DARK,
   },
-  "& .markdownBlockquote": {
-    padding: "30px 20px",
-    background: COLOR_GRAY_LINE,
-    borderRadius: "15px"
-  }
+  "& .markdownBlockquoteStyle": {
+    position: "relative",
+  },
+  "& .markdownBlockquoteIconStyle": {
+    position: "absolute",
+    display: "flex",
+    alignItems: "flex-start",
+    top: { xs: "-14px", sm: "0px" },
+    left: { xs: "-4px", sm: "-50px" },
+    transform: { xs: "translate(0, -14px)", sm: "translate(0, 7px)" }
+  },
 }
 
-const SectionMarckdown = ({ data }) => {
+const SectionBpMarckdown = ({ data }) => {
   const markdown = data?.description
 
   const paddings = data?.Paddings
@@ -238,25 +247,20 @@ const SectionMarckdown = ({ data }) => {
 
   return (
     <Box component="section" sx={sectionStyle} >
-      <Box sx={{ display: { xs: "none", sm: "block" } }}>
-        <Container>
-          <Grid container spacing={{ xs: 4, sm: 4, md: 4 }}>
-            <Grid item xs={12} sm={3} md={2}></Grid>
-            <Grid item xs={12} sm={9} md={8}>
-              <Box sx={markdownStyle} >
-                <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
-              </Box>
-            </Grid>
+
+      <Container>
+        <Grid container spacing={{ xs: 4, sm: 4, md: 4 }}>
+          <Grid item xs={12} sm={9} md={12}>
+            <Box sx={markdownStyle} >
+              <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
+            </Box>
           </Grid>
-        </Container>
-      </Box>
-      <Box sx={{ display: { xs: "block", sm: "none" } }}>
-        <Box sx={markdownStyle} >
-          <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
-        </Box>
-      </Box>
+        </Grid>
+      </Container>
+
+
     </Box >
   )
 }
 
-export default SectionMarckdown
+export default SectionBpMarckdown

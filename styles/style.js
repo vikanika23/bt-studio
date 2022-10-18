@@ -10,7 +10,6 @@ export const COLOR_WHITE = "#ffffff"
 export const COLOR_PURPUR = "#43577D" //основной голубой
 
 
-
 export const COLOR_RED = "#D90A12"
 export const COLOR_GREEN = "#50AD35"
 export const COLOR_LIGHTER_GREY = "#91A3BC"
@@ -60,7 +59,7 @@ export const buttonPurpurContainedStyle = {
 // Голубая кнопка с обводкой и белым текстом
 export const buttonBlueWhiteOutlinedStyle = {
   border: `2px solid ${COLOR_GRAY_LINE}`,
-  color: COLOR_BLUE,
+  color: COLOR_DARK,
   fontSize: { xs: "14px", md: "15px" },
   lineHeight: { xs: "18px", md: "19px" },
   letterSpacing: "0.015em",
@@ -70,6 +69,24 @@ export const buttonBlueWhiteOutlinedStyle = {
   transition: "all .25s ease",
   "&:hover": {
     backgroundColor: "transparent",
-    color: COLOR_DARK,
+    color: COLOR_RED,
   }
+}
+
+
+export const HEDING_H1 = {
+  fontWeight: 600,
+  fontSize: { xs: "24px", md: "36px" },
+  lineHeight: { xs: "30px", md: "38px" },
+  marginBottom: { xs: "20px", md: "30px" },
+  textTransform: "uppercase"
+}
+
+export const HEDING_H2 = {
+  fontWeight: 600,
+  fontSize: { xs: "30px", sm: "36px", md: "36px" },
+  lineHeight: { xs: "34px", sm: "40px", md: "40px" },
+  letterSpacing: { xs: "-0.015em", sm: "-0.035em", md: "-0.035em" },
+  color: COLOR_DARK,
+  marginBottom: { xs: "15px", sm: "20px" }
 }
