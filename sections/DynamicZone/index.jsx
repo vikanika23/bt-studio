@@ -10,7 +10,7 @@ const DynamicZone = ({ data }) => {
 
   const dynamic_zone = data?.page?.attributes?.dynamic_zone
 
-  console.log("ДИНАМЧЕСКАЯ ДЛЯ PAgE", { dynamic_zone })
+  // console.log("ДИНАМЧЕСКАЯ ДЛЯ PAgE", { dynamic_zone })
 
   return (
     <>

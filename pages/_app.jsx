@@ -22,7 +22,7 @@ export default function MyApp({ Component, pageProps, emotionCache = clientSideE
 
 const { header, footer } = pageProps
 
-console.log({pageProps})
+// console.log({pageProps})
 const router = useRouter()
   
 

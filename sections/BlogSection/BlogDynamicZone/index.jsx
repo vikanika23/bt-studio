@@ -7,7 +7,7 @@ import Advice from '../Advice'
 const BlogDynamicZone = ({ data }) => {
 
   const blog_dynamic_zone = data?.attributes?.blog_dynamic_zone
-  console.log("ДИНАМЧЕСКАЯ ДЛЯ BLOG", { blog_dynamic_zone })
+  // console.log("ДИНАМЧЕСКАЯ ДЛЯ BLOG", { blog_dynamic_zone })
   
   return (
     <>

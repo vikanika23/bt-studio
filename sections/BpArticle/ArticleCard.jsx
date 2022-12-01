@@ -57,10 +57,9 @@ const textTagStyle = {
 
 
 const cardTitleStyle = {
-  fontWeight: '500',
-  fontSize: { xs: '20px', sm: '20px', md: '20px' },
-  lineHeight: { xs: '24px', sm: '26px', md: '26px' },
-  letterSpacing: { xs: '0.015em', sm: '0.015em', md: '0.015em' },
+  fontWeight: '700',
+  fontSize: { xs: '16px', sm: '16px', md: '16x' },
+  lineHeight: { xs: '28px', sm: '28px', md: '28px' },
   color: COLOR_DARK,
   marginBottom: { xs: '15px', sm: '21px', md: '21px' },
   transition: 'all .25s ease',
