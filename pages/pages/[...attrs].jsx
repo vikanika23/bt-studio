@@ -60,9 +60,9 @@ export async function getStaticProps({ params }) {
       "dynamic_zone.Paddings",
       "Paddings",
       "dynamic_zone.page_menu",
-      "dynamic_zone.page_menu.link"
-      
-      
+      "dynamic_zone.page_menu.link",
+      "dynamic_zone.adventege",
+      "dynamic_zone.adventege.image"
     ]
   })}`)
 

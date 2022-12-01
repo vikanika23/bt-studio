@@ -91,8 +91,9 @@ const overlayStyle = {
   left: 0,
   width: '100%',
   height: '100%',
-  backgroundColor: '#3E5F8A',
-  opacity: 0.46,
+  // backgroundColor: '#3E5F8A',
+  backgroundColor: '#000',
+  opacity: 0.5,
 
 }
 

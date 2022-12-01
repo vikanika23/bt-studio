@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import NextLink from 'next/link'
 import Header from '../sections/Header'
 import Footer from '../sections/Footer'
-import Sectin01FirstScreen from '../sections/Sectin01FirstScreen'
 import { fetcher } from "../utils/fetchers"
 import qs from 'qs'
 import { getGlobalData } from "../utils/queries"
@@ -13,7 +12,6 @@ const HomePage = (props) => {
   return (
     <>
       <DynamicZone data={props} />
-      <Sectin01FirstScreen data={props} />
     </>
   )
 }
@@ -63,8 +61,10 @@ export async function getStaticProps({ params }) {
       "dynamic_zone.button",
       "dynamic_zone.button.link",
       "dynamic_zone.Paddings",
-      "Paddings"
-      
+      "Paddings",
+      "dynamic_zone.adventege",
+      "dynamic_zone.adventege.image",
+      "dynamic_zone.big_image"
     ]
   })}`)
 

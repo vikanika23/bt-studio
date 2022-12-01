@@ -11,7 +11,7 @@ const textStyle = {
   paddingRight: { xs: "0", sm: "0", md: "300px" },
 }
 
-const SectionBp01 = ({ data }) => {
+export default function Bp01({ data }) {
   const title = data?.title
   const subtext = data?.subtext
 
@@ -34,5 +34,3 @@ const SectionBp01 = ({ data }) => {
     </>
   )
 }
-
-export default SectionBp01

@@ -20,7 +20,7 @@ const buttonStyle = {
   marginBottom: { xs: "20px", md: "0" }
 }
 
-const SectionBpArticle = ({ data }) => {
+export default function BpArticle({ data }) {
 
   const title = data?.title
   const text = data?.text
@@ -37,7 +37,7 @@ const SectionBpArticle = ({ data }) => {
   const sectionStyle = {
     ...getPaddings(paddingTop, paddingBottom, { xs: "10px", md: "15px" }, { xs: "10px", md: "15px" })
   }
-  
+
   return (
     <Box component="section" sx={sectionStyle} >
 
@@ -48,13 +48,15 @@ const SectionBpArticle = ({ data }) => {
             <Typography sx={textStyle}>{text}</Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
-            <Box sx={{ textAlign: { xs: "center", md: "end" } }}>
-              <NextLink href={href} passHref>
-                <Button sx={buttonStyle} endIcon={<ArrowRightAltIcon />} disableRipple>
-                  {label}
-                </Button>
-              </NextLink>
-            </Box>
+            {button && (
+              <Box sx={{ textAlign: { xs: "center", md: "end" } }}>
+                <NextLink href={href} passHref>
+                  <Button sx={buttonStyle} endIcon={<ArrowRightAltIcon />} disableRipple>
+                    {label}
+                  </Button>
+                </NextLink>
+              </Box>
+            )}
           </Grid>
         </Grid>
 
@@ -69,5 +71,3 @@ const SectionBpArticle = ({ data }) => {
     </Box>
   )
 }
-
-export default SectionBpArticle
